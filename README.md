@@ -343,14 +343,4 @@ Your assignment will be tested using:
 3. **Function testing** - Import Q3 utilities and test with sample data
 4. **Output validation** - Verify files exist and contain expected data
 
-See `GRADING_SPEC.md` for detailed testing criteria and point breakdowns.
-
-
-## Tips
-
-See `TIPS.md` for:
-
-- Common pandas patterns
-- Debugging strategies
-
-Good luck!
+See `GRADING_SPEC.md` for example testing criteria and point breakdowns.
