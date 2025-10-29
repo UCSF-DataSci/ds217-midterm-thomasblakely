@@ -5,6 +5,8 @@
 # NOTE: Q3 (q3_data_utils.py) is a library imported by the notebooks, not run directly
 # NOTE: The main pipeline runs Q4-Q7 notebooks in order
 
+chmod +x q8_run_pipeline.sh
+
 echo "Starting clinical trial data pipeline..." > reports/pipeline_log.txt
 
 echo "Running Q4: Data Exploration..." >> reports/pipeline_log.txt
