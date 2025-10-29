@@ -18,7 +18,7 @@ dtype: int64
 
 Cleaning Method
 (1) Performed median imputation on all numeric columns
-(2) Dropped rows containing a missing value for: 'patient_id', 'age', 'outcome_cvd', 'dropout'
+(2) Dropped rows containing a missing value for: 'patient_id', 'age', 'outcome_cvd', 'dropout', 'adherence_pct'
 
 Final Dataset
 Data Dimensions: (10000, 18)
