@@ -1,6 +1,4 @@
-# TODO: Add shebang line: #!/bin/bash
-# Assignment 5, Question 8: Pipeline Automation Script
-# Run the clinical trial data analysis pipeline
+#!/bin/bash
 
 # NOTE: This script assumes Q1 has already been run to create directories and generate the dataset
 # NOTE: Q2 (q2_process_metadata.py) is a standalone Python fundamentals exercise, not part of the main pipeline
@@ -9,8 +7,28 @@
 
 echo "Starting clinical trial data pipeline..." > reports/pipeline_log.txt
 
-# TODO: Run analysis notebooks in order (q4-q7) using nbconvert with error handling
-# Use either `$?` or `||` operator to check exit codes and stop on failure
-# Add a log entry for each notebook execution or failure
-# jupyter nbconvert --execute --to notebook q4_exploration.ipynb
+echo "Running Q4: Data Exploration..." >> reports/pipeline_log.txt
+
+jupyter nbconvert --execute --to notebook --inplace q4_exploration.ipynb || {
+    echo "Error, Q4 has failed." >> reports/pipeline_log.txt; exit 4;
+}
+
+echo "Running Q5: Missing Data Analysis" >> reports/pipeline_log.txt
+
+jupyter nbconvert --execute --to notebook --inplace q5_missing_data.ipynb || {
+    echo "Error, Q5 has failed." >> reports/pipeline_log.txt; exit 5;
+}
+
+echo "Running Q6: Data Transformation" >> reports/pipeline_log.txt
+
+jupyter nbconvert --execute --to notebook --inplace q6_transformation.ipynb || {
+    echo "Error, Q6 has failed." >> reports/pipeline_log.txt; exit 6;
+}
+
+echo "Running Q7: Group Operation and Final Analysis" >> reports/pipeline_log.txt
+
+jupyter nbconvert --execute --to notebook --inplace q7_aggregation.ipynb || {
+    echo "Error, Q7 has failed." >> reports/pipeline_log.txt; exit 7;
+}
+
 echo "Pipeline complete!" >> reports/pipeline_log.txt

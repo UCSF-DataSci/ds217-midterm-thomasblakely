@@ -1,0 +1,5 @@
+Analysis Report
+
+Finding 1: Patients in Treatment A had the lowest cardiovascular disease rate (31.9%).
+Finding 2: Patients in Treatment A had the highest number of adverse events (628).
+Finding 3: Patients in Treatment B had the highest adherence rate (61.1%).

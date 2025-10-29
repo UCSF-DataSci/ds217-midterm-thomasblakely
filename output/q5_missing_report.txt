@@ -1,0 +1,25 @@
+Missing Data Report
+
+Original Dataset
+Data dimensions: (10000, 18)
+
+Total missing values: 4764
+
+Columns with missing values:
+bmi                   438
+systolic_bp           414
+diastolic_bp          414
+cholesterol_total     554
+cholesterol_hdl       554
+cholesterol_ldl       554
+glucose_fasting       369
+adherence_pct        1467
+dtype: int64
+
+Cleaning Method
+(1) Dropped rows containing a missing value for: 'patient_id', 'age', 'outcome_cvd', 'dropout'
+(2) Performed median imputation on all numeric columns
+
+Final Dataset
+Data Dimensions: (10000, 18)
+Rows removed: 0

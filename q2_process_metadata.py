@@ -1,7 +1,5 @@
-# TODO: Add shebang line: #!/usr/bin/env python3
-# Assignment 5, Question 2: Python Data Processing
-# Process configuration files for data generation.
-
+#!/usr/bin/env python3
+import random
 
 def parse_config(filepath: str) -> dict:
     """
@@ -19,7 +17,13 @@ def parse_config(filepath: str) -> dict:
         '100'
     """
     # TODO: Read file, split on '=', create dict
-    pass
+    config = {}
+    with open(filepath, 'r') as file:
+        for row in file:
+            row = row.strip()
+            key, value = row.split('=')
+            config[key] = value
+    return config
 
 
 def validate_config(config: dict) -> dict:
@@ -43,8 +47,32 @@ def validate_config(config: dict) -> dict:
         >>> results['sample_data_rows']
         True
     """
-    # TODO: Implement with if/elif/else
-    pass
+    # Validate config dict has length 3
+    if len(config) != 3:
+        raise ValueError(f"Error, invalid argument length: {len(config)}")
+    
+    validation = {}
+    # Validates each config metric using if/elif/else logic
+    for key, value in config.items():
+        if key == 'sample_data_rows':
+            if value.isdigit():
+                validation[key] = int(value) > 0
+            else:
+                validation[key] = False
+        elif key == 'sample_data_min':
+            if value.isdigit():
+                validation[key] = int(value) >= 1
+            else:
+                validation[key] = False
+        elif key == 'sample_data_max':
+            min_value = config.get('sample_data_min')
+            if value.isdigit() and min_value.isdigit():
+                validation[key] = int(value) > int(min_value)
+            else:
+                validation[key] = False
+        else:
+            validation[key] = False
+    return validation
 
 
 def generate_sample_data(filename: str, config: dict) -> None:
@@ -66,10 +94,18 @@ def generate_sample_data(filename: str, config: dict) -> None:
         >>> import random
         >>> random.randint(18, 75)  # Returns random integer between 18-75
     """
-    # TODO: Parse config values (convert strings to int)
-    # TODO: Generate random numbers and save to file
-    # TODO: Use random module with config-specified range
-    pass
+    # Parse config values (convert strings to int)
+    num_rows = int(config['sample_data_rows'])
+    min_value = int(config['sample_data_min'])
+    max_value = int(config['sample_data_max'])
+
+    # Generate random numbers and save to file
+    # Use random module with config-specified range
+    with open(filename, 'w') as file:
+        for row in range(num_rows):
+            random_number = random.randint(min_value, max_value)
+            file.write(f"{random_number}\n")
+ 
 
 
 def calculate_statistics(data: list) -> dict:
@@ -87,17 +123,41 @@ def calculate_statistics(data: list) -> dict:
         >>> stats['mean']
         30.0
     """
-    # TODO: Calculate stats
-    pass
+    # Calculate stats
+    cs_count = len(data)
+    cs_sum = sum(data)
+    cs_mean = sum(data) / len(data)
+    data_sort = sorted(data)
+
+    # Calculate median based on even or odd number of values
+    if cs_count % 2 == 0:
+        cs_median = (data_sort[(cs_count // 2) - 1] + data_sort[cs_count // 2]) / 2
+    else:
+        cs_median = data_sort[cs_count // 2]
+    return {
+        'mean' : cs_mean,
+        'median' : cs_median,
+        'sum' : cs_sum,
+        'count' : cs_count
+    }
 
 
 if __name__ == '__main__':
-    # TODO: Test your functions with sample data
-    # Example:
-    # config = parse_config('q2_config.txt')
-    # validation = validate_config(config)
-    # generate_sample_data('data/sample_data.csv', config)
-    # 
-    # TODO: Read the generated file and calculate statistics
-    # TODO: Save statistics to output/statistics.txt
-    pass
+    # Test  functions with sample data
+    config = parse_config('q2_config.txt')
+    validation = validate_config(config)
+    generate_sample_data('data/sample_data.csv', config)
+    
+    # Read the generated file and calculate statistics
+    numbers = []
+    with open('data/sample_data.csv', 'r') as file:
+        for row in file:
+            row = row.strip()
+            numbers.append(int(row))
+    stats = calculate_statistics(numbers)
+
+    # Save statistics to output/statistics.txt
+    with open('output/statistics.txt', 'w') as file:
+        for key, value in stats.items():
+            file.write(f"{key}: {value}\n")
+    print("q2_process_metadata.py has successfully run")

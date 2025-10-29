@@ -1,0 +1,6 @@
+Starting clinical trial data pipeline...
+Running Q4: Data Exploration...
+Running Q5: Missing Data Analysis
+Running Q6: Data Transformation
+Running Q7: Group Operation and Final Analysis
+Pipeline complete!
