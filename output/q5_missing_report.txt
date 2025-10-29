@@ -17,9 +17,10 @@ adherence_pct        1467
 dtype: int64
 
 Cleaning Method
-(1) Dropped rows containing a missing value for: 'patient_id', 'age', 'outcome_cvd', 'dropout'
-(2) Performed median imputation on all numeric columns
+(1) Performed median imputation on all numeric columns
+(2) Dropped rows containing a missing value for: 'patient_id', 'age', 'outcome_cvd', 'dropout'
 
 Final Dataset
 Data Dimensions: (10000, 18)
-Rows removed: 0
+Rows removed [None since numeric imputation was the only issue]: 0
+Number of missing values remaining: 0

@@ -165,6 +165,7 @@ def transform_types(df: pd.DataFrame, type_map: dict) -> pd.DataFrame:
         >>> df_typed = transform_types(df, type_map)
     """
     df_typed = df.copy()
+
     # Check valid key value pair and does proper mapping. Loops for multiple inputs 
     for key, value in type_map.items():
         if value not in ['datetime', 'numeric', 'category', 'string']:
@@ -204,6 +205,7 @@ def create_bins(df: pd.DataFrame, column: str, bins: list,
         ... )
     """
     df_binned = df.copy()
+    # Use right = False to properly bin the right side [<X]
     if new_column is None:
         new_column = f"{column}_binned"
     df_binned[new_column] = pd.cut(df_binned[column], bins = bins, labels = labels, right = False)

@@ -16,7 +16,7 @@ def parse_config(filepath: str) -> dict:
         >>> config['sample_data_rows']
         '100'
     """
-    # TODO: Read file, split on '=', create dict
+    # Read file, split on '=', create dict
     config = {}
     with open(filepath, 'r') as file:
         for row in file:
@@ -143,7 +143,7 @@ def calculate_statistics(data: list) -> dict:
 
 
 if __name__ == '__main__':
-    # Test  functions with sample data
+    # Test functions with sample data
     config = parse_config('q2_config.txt')
     validation = validate_config(config)
     generate_sample_data('data/sample_data.csv', config)
